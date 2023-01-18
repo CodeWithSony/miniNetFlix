@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetFlix Clone</title>
+    <link rel="shortcut icon" href="#">
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+     .mainDiv{
+        background-color: rgba(220, 241, 249, 0.873);
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+  place-items: center;
+     }
+     .centerDiv{
+        display: flex;
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: scroll;
+     }
+     img{
+        padding: 20px;
+        border-radius: 30px;
+        transition: transform 0.3s ease-in;
+     }
+     img:hover{
+        transform: scale(1.1);
+        
+     }
+     .centerDiv::-webkit-scrollbar{
+        overflow: hidden;
+        /* scrollbar-width: none; */
+     }
+
+    </style>
+</head>
+<body>
+    <div class="mainDiv">
+        <div class="centerDiv" id="centerDiv"></div>
+    </div>
+    <script>
+           const centerDiv = document.getElementById("centerDiv");
+        
+        // used apis
+        // picsum.photos
+        // https://jsonplaceholder.typicode.com/photos
+        fetch("https://jsonplaceholder.typicode.com/photos?_limit=20").then((apiData)=>{
+            // console.log(apiData.json()); //to convert it into a json
+            return apiData.json();
+        }).then((jsondata)=>{
+    
+            jsondata.map((val) =>{
+                key = val.id;
+                let img = document.createElement("img");
+                // img.src = val.url;
+                img.src = `https://picsum.photos/200/300?random=${val.id}`;
+
+                centerDiv.appendChild(img);
+                console.log(val.url);
+
+                
+            })
+            
+        })
+    </script>
+</body>
+</html>
